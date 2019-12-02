@@ -3,6 +3,15 @@
   --h_color_blue: #009cd3;
   --h_color_yellow: #fbc300;
   --h_color_gray: #e7e7e7;
+  --balloon-color: #7f7f7f;
+  --under-box-color: #7f7f7f;
+  --default-font-size: 12px;
+}
+
+body {
+  font-size: var(--default-font-size);
+  font-family: 'メイリオ';
+  overflow-wrap: break-word;
 }
 
 .wrapper {
@@ -12,10 +21,10 @@
   padding: 0.3em;
   display: grid;
   background-color: #e6e6e6;
-  border-top: 2px solid white;
+  /* border-top: 2px solid white;
   border-right: 2px solid darkslategray;
   border-bottom: 2px solid darkslategray;
-  border-left: 2px solid white;
+  border-left: 2px solid white; */
   /* grid関連 */
   column-gap: 5px;
   row-gap: 5px;
@@ -26,7 +35,16 @@
 }
 
 .launch_icon {
-  width: 64px;
+  height: 128px;
+}
+
+.launch_icon:hover {
+  /* ここだけ手厚い */
+  -webkit-filter: invert(100%);
+  -moz-filter: invert(100%);
+  -o-filter: invert(100%);
+  -ms-filter: invert(100%);
+  filter: invert(100%);
 }
 
 .item_title {
@@ -43,55 +61,125 @@
 
 @supports (display: grid) {
   .grid-item {
-    width: auto;
-    min-height: 0;
-    /* padding: .3em; */
-    display: inline-block;
+    border-radius: 10px 10px 10px 10px;
     /*画像はコンテナいっぱいに*/
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 10px 10px 10px 10px;
+    background-size: contain;
   }
+  /* ----------- */
+  /* タイトル --- */
+  /* ----------- */
   .header {
     color: white;
-    background-image: url("../img/computer_jinkou_chinou.png");
-    font-size: 48px;
+    background-image: url("../img/irasutoya/computer_jinkou_chinou_rad.png");
+    background-size: cover;
+    font-size: 60px;
     grid-column: 1 / span 3;
     grid-row: 1 / span 1;
   }
+  /* ----------- */
+  /* 起動ボタン - */
+  /* ----------- */
   .main {
+    padding: 10px;
     background-color: var(--h_color_green);
     grid-column: 1 / span 1;
     grid-row: 2 / span 1;
   }
+  /* ----------- */
+  /* 技術 ------ */
+  /* ----------- */
   .tech {
+    /* きたないflex */
+    display: flex;
+    padding: 10px;
+    /* 袋文字 */
+    font-size: 60px;
+    fill: gold;
+    stroke: chocolate;
+    stroke-width: 2;
+    stroke-linejoin: round;
     background-color: var(--h_color_yellow);
-    clip-path: polygon(0 0, 100% 0, calc(100% - 100px) 100%, 0 100%);
-    margin-right: -50px;
+    /* clip-path: polygon(0 0, 100% 0, calc(100% - 100px) 100%, 0 100%);
+    margin-right: -50px; */
+    background-image: url("../img/irasutoya/ai_shigoto_rad.png");
+    background-position: left;
     grid-column: 2 / span 1;
     grid-row: 2 / span 1;
-    border-radius: 10px 0 10px 10px;
+    /* transition: all 0.4s 0s ease; */
   }
+  .tech:hover {
+    transform-origin: left;
+    grid-column: 2 / span 2;
+    margin: 0;
+    z-index: 2;
+  }
+  .tech-explain {
+    width: 300px;
+    font-size: var(--default-font-size);
+    margin: 0 0 0 auto;
+    text-align: right;
+    visibility: hidden;
+  }
+  .tech:hover .tech-explain {
+    visibility: visible;
+  }
+  /* ----------- */
+  /* 生活 ------ */
+  /* ----------- */
   .life {
+    flex-basis: content;
+    padding: 10px;
+    /* 袋文字 */
+    text-align: right;
+    font-size: 60px;
+    fill: lightskyblue;
+    stroke: mediumblue;
+    stroke-width: 2;
+    stroke-linejoin: round;
     background-color: var(--h_color_blue);
-    clip-path: polygon(100px 0, 100% 0, 100% 100%, 0 100%);
-    margin-left: -50px;
+    /* clip-path: polygon(100px 0, 100% 0, 100% 100%, 0 100%);
+    margin-left: -50px; */
+    background-image: url("../img/irasutoya/ai_study_kikaigakusyu_rad.png");
+    background-position: right;
     grid-column: 3 / span 1;
     grid-row: 2 / span 1;
-    border-radius: 10px 10px 10px 0;
-    text-align: right;
   }
+  .life:hover {
+    transform-origin: right;
+    grid-column: 2 / span 2;
+    margin: 0;
+    z-index: 2;
+  }
+  .life-explain {
+    font-size: var(--default-font-size);
+    margin: 0;
+    text-align: left;
+    visibility: hidden;
+  }
+  .life:hover .life-explain {
+    visibility: visible;
+  }
+  /* ----------- */
+  /* 注意事項 --- */
+  /* ----------- */
   .caution {
     top: -1.8em;
     grid-column: 1 / span 1;
     grid-row: 3 / span 1;
   }
+  /* ----------- */
+  /* お知らせ --- */
+  /* ----------- */
   .notice {
     top: -1.8em;
     grid-column: 2 / span 1;
     grid-row: 3 / span 1;
   }
+  /* ----------- */
+  /* お問合せ --- */
+  /* ----------- */
   .footer {
     grid-column: 3 / span 1;
     grid-row: 3 / span 1;
@@ -112,7 +200,7 @@
   color: #FFF;
   font-size: 20px;
   font-weight: bold;
-  background: #70a6ff;
+  background: var(--balloon-color);
   border-radius: 50%;
   box-sizing: border-box;
 }
@@ -124,21 +212,22 @@
   left: 50%;
   margin-left: -15px;
   border: 15px solid transparent;
-  border-top: 15px solid #70a6ff;
+  border-top: 15px solid var(--balloon-color);
   z-index: 0;
 }
 
 /* インデックス付きはこ */
 
 .box {
-  border: 2px solid slategray;
+  border: 2px solid var(--under-box-color);
   border-radius: 0 0 10px 10px;
   height: 100%;
   overflow: hidden;
 }
 
 h3.box_header {
-  background-color: slategray;
+  font-size: 18px;
+  background-color: var(--under-box-color);
   text-align: center;
   color: #FFF;
   margin: 0;
@@ -148,7 +237,21 @@ h3.box_header {
 }
 
 .box .inner {
+  /* width: 100%; */
   padding: .5em;
   border-radius: 0 0 10px 10px;
   overflow: auto;
+}
+
+svg {
+  display: inline-block;
+  width: 250px;
+  height: auto;
+  overflow: visible;
+}
+
+ul {
+  margin: 0;
+  padding-inline-start: 20px;
+  list-style-image: url("../img/irasutoya/computer_jinkou_chinou_li.png");
 }
