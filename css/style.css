@@ -1,8 +1,10 @@
+@charset "UTF-8";
 :root {
   --h_color_green: #4aae35;
   --h_color_blue: #009cd3;
   --h_color_yellow: #fbc300;
-  --h_color_gray: #e7e7e7;
+  --h_color_gray_1: #c9c9c9;
+  --h_color_gray_2: #e6e6e6;
   --balloon-color: #7f7f7f;
   --under-box-color: #7f7f7f;
   --default-font-size: 12px;
@@ -19,6 +21,7 @@ body {
   height: 550px;
   margin: 0 auto;
   padding: 0.3em;
+  display: -ms-grid;
   display: grid;
   background-color: #e6e6e6;
   /* border-top: 2px solid white;
@@ -26,16 +29,21 @@ body {
   border-bottom: 2px solid darkslategray;
   border-left: 2px solid white; */
   /* grid関連 */
-  column-gap: 5px;
+  -webkit-column-gap: 5px;
+          column-gap: 5px;
   row-gap: 5px;
-  grid-template-columns: repeat(3, 300px);
-  grid-template-rows: 15% 45% 30%;
-  justify-content: center;
+  -ms-grid-columns: (250px)[4];
+      grid-template-columns: repeat(4, 250px);
+  -ms-grid-rows: 25% 25% 25% 25%;
+      grid-template-rows: 25% 25% 25% 25%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   border-radius: 10px 10px 10px 10px;
 }
 
 .launch_icon {
-  height: 128px;
+  height: 64px;
 }
 
 .launch_icon:hover {
@@ -54,9 +62,15 @@ body {
 .centering {
   /* 上下中央に寄せる */
   text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 @supports (display: grid) {
@@ -74,24 +88,42 @@ body {
     color: white;
     background-image: url("../img/irasutoya/computer_jinkou_chinou_rad.png");
     background-size: cover;
-    font-size: 60px;
-    grid-column: 1 / span 3;
+    font-size: 48px;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+    grid-column: 1 / span 2;
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 1;
+    grid-row: 1 / span 1;
+  }
+  .panel {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+    grid-column: 1 / span 2;
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 1;
     grid-row: 1 / span 1;
   }
   /* ----------- */
   /* 起動ボタン - */
   /* ----------- */
-  .main {
+  .launch {
     padding: 10px;
     background-color: var(--h_color_green);
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
     grid-column: 1 / span 1;
-    grid-row: 2 / span 1;
+    -ms-grid-row: 2;
+    -ms-grid-row-span: 3;
+    grid-row: 2 / span 3;
   }
   /* ----------- */
   /* 技術 ------ */
   /* ----------- */
   .tech {
     /* きたないflex */
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     padding: 10px;
     /* 袋文字 */
@@ -105,12 +137,19 @@ body {
     margin-right: -50px; */
     background-image: url("../img/irasutoya/ai_shigoto_rad.png");
     background-position: left;
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 1;
     grid-column: 2 / span 1;
+    -ms-grid-row: 2;
+    -ms-grid-row-span: 1;
     grid-row: 2 / span 1;
     /* transition: all 0.4s 0s ease; */
   }
   .tech:hover {
-    transform-origin: left;
+    -webkit-transform-origin: left;
+            transform-origin: left;
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 2;
     grid-column: 2 / span 2;
     margin: 0;
     z-index: 2;
@@ -129,7 +168,8 @@ body {
   /* 生活 ------ */
   /* ----------- */
   .life {
-    flex-basis: content;
+    -ms-flex-preferred-size: content;
+        flex-basis: content;
     padding: 10px;
     /* 袋文字 */
     text-align: right;
@@ -143,11 +183,18 @@ body {
     margin-left: -50px; */
     background-image: url("../img/irasutoya/ai_study_kikaigakusyu_rad.png");
     background-position: right;
+    -ms-grid-column: 3;
+    -ms-grid-column-span: 1;
     grid-column: 3 / span 1;
+    -ms-grid-row: 2;
+    -ms-grid-row-span: 1;
     grid-row: 2 / span 1;
   }
   .life:hover {
-    transform-origin: right;
+    -webkit-transform-origin: right;
+            transform-origin: right;
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 2;
     grid-column: 2 / span 2;
     margin: 0;
     z-index: 2;
@@ -166,7 +213,11 @@ body {
   /* ----------- */
   .caution {
     top: -1.8em;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
     grid-column: 1 / span 1;
+    -ms-grid-row: 3;
+    -ms-grid-row-span: 1;
     grid-row: 3 / span 1;
   }
   /* ----------- */
@@ -174,20 +225,27 @@ body {
   /* ----------- */
   .notice {
     top: -1.8em;
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 1;
     grid-column: 2 / span 1;
+    -ms-grid-row: 3;
+    -ms-grid-row-span: 1;
     grid-row: 3 / span 1;
   }
   /* ----------- */
   /* お問合せ --- */
   /* ----------- */
   .footer {
+    -ms-grid-column: 3;
+    -ms-grid-column-span: 1;
     grid-column: 3 / span 1;
+    -ms-grid-row: 3;
+    -ms-grid-row-span: 1;
     grid-row: 3 / span 1;
   }
 }
 
 /* ふきだし */
-
 .balloon3 {
   position: relative;
   display: inline-block;
@@ -202,7 +260,8 @@ body {
   font-weight: bold;
   background: var(--balloon-color);
   border-radius: 50%;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .balloon3:before {
@@ -217,7 +276,6 @@ body {
 }
 
 /* インデックス付きはこ */
-
 .box {
   border: 2px solid var(--under-box-color);
   border-radius: 0 0 10px 10px;
@@ -252,6 +310,7 @@ svg {
 
 ul {
   margin: 0;
-  padding-inline-start: 20px;
+  -webkit-padding-start: 20px;
+          padding-inline-start: 20px;
   list-style-image: url("../img/irasutoya/computer_jinkou_chinou_li.png");
 }
