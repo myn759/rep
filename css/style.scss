@@ -1,17 +1,18 @@
 ////////// 変数
-$h-color-green: #4aae35;
-$h-color-blue: #009cd3;
-$h-color-yellow: #fbc300;
-$h-color-gray-1: #c9c9c9;
-$h-color-gray-2: #e6e6e6;
-$wrapper-color: white;
-$balloon-color: #7f7f7f;
-$under-box-color: #7f7f7f;
+$h-color-green: rgb(74, 174, 53);
+$h-color-blue: rgb(0, 156, 211);
+$h-color-yellow: rgb(251, 195, 0);
+$h-color-gray-1: rgb(201, 201, 201);
+$h-color-gray-2: rgb(230, 230, 230);
+$h-color-red: rgb(230, 0, 39);
+$wrapper-color: rgb(255, 255, 255);
+$balloon-color: rgb(127, 127, 127);
+$under-box-color: rgb(127, 127, 127);
 // フォントサイズ系
 $default-font-size: 12px;
 $font-size-large: 32pt;
 $font-size-mid: 16pt;
-$font-size-box-header: 18px;
+$font-size-balloon: 16px;
 // パネル
 $panel-width: 100px;
 $panel-col-count: 10;
@@ -19,6 +20,10 @@ $panel-height: 35px;
 $panel-row-count: 15;
 $col-gap-size: 5px;
 $row-gap-size: 5px;
+$pad: 10px;
+$button-border: 2px;
+// アニメ
+$yure: 2px;
 ////////// 変数
 
 ////////// mixIn
@@ -28,38 +33,21 @@ $row-gap-size: 5px;
   grid-column: $startCol / span $colCount;
   background-color: $bgColor;
   border-radius: 10px 10px 10px 10px;
-  padding: 10px;
-}
-
-// 背景画像
-@mixin panel-back-ground($bgImgPath: "", $bgSize: contain) {
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: $bgSize;
-  background-image: url($bgImgPath);
+  padding: $pad;
 }
 
 // ページのヘッダ用
 @mixin page-header($startRow: 1, $rowCount: 1, $startCol: 1, $colCount: 1, $bgColor: "", $bgImgPath: "") {
   @include __panel__($startRow, $rowCount, $startCol, $colCount, $bgColor);
-  @include panel-back-ground($bgImgPath, cover);
   @include centering();
   font-size: $font-size-large;
-  color: white;
-}
-
-// コンテンツのヘッダ用
-@mixin content-header($startRow: 1, $rowCount: 1, $startCol: 1, $colCount: 1, $bgColor: $h-color-green, $bgImgPath: "") {
-  @include __panel__($startRow, $rowCount, $startCol, $colCount, $bgColor);
-  @include panel-back-ground($bgImgPath, cover);
-  @include centering();
-  font-size: $font-size-mid;
+  // color: white;
 }
 
 // コンテンツのボディ用
-@mixin content-body($startRow: 1, $rowCount: 1, $startCol: 1, $colCount: 1, $bgColor: $h-color-gray-2, $bgImgPath: "", $bgSize: "") {
+@mixin content-body($startRow: 1, $rowCount: 1, $startCol: 1, $colCount: 1, $bgColor: $h-color-gray-2) {
   @include __panel__($startRow, $rowCount, $startCol, $colCount, $bgColor);
-  @include panel-back-ground($bgImgPath, $bgSize);
+  // color: white;
 }
 
 // 上下中央寄せ
@@ -79,6 +67,31 @@ $row-gap-size: 5px;
   stroke-linejoin: round;
 }
 
+// ボタン基底
+@mixin action-button($width: 100px, $height: 100px, $background: white, $bprder: black, $type: none) {
+  @include centering();
+  font-size: $font-size-mid;
+  color: white;
+  background: $background;
+  width: $width - $pad * 2 - $button-border * 4;
+  height: $height - $pad * 2 - $button-border * 4;
+  overflow: hidden;
+  border: 2px black dotted;
+  box-shadow: 0 0 0 $button-border $background, 0 1px 3px $button-border rgba(0, 0, 0, 0.5);
+  @if $type == "circle" {
+    border-radius: 50%;
+  }
+  & img {
+    height: 64px;
+  }
+  &:hover {
+    filter: brightness(125%);
+  }
+  &:hover img {
+    animation: hurueru 0.1s infinite;
+  }
+}
+
 ////////// mixIn
 
 ////////// 要素
@@ -86,6 +99,9 @@ body {
   font-size: $default-font-size;
   font-family: "メイリオ";
   overflow-wrap: break-word;
+  background-image: url("../img/irasutoya/mono.png");
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 svg {
@@ -100,6 +116,12 @@ ul {
   padding-inline-start: 20px;
   list-style-image: url("../img/irasutoya/computer_jinkou_chinou_li.png");
 }
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
 ////////// 要素
 
 ////////// 本体
@@ -110,7 +132,7 @@ ul {
   margin: 0 auto;
   padding: 0.3em;
   display: grid;
-  background-color: $wrapper_color;
+  // background-color: $wrapper_color;
   column-gap: $col-gap-size;
   row-gap: $row-gap-size;
   grid-template-columns: repeat($panel-col-count, $panel_width);
@@ -121,153 +143,128 @@ ul {
 
 // 起動アイコン
 .launch_icon {
-  height: 64px;
-  &:hover {
-    filter: invert(100%);
-  }
+  $_width: 200px;
+  $_height: 200px;
+  $_background: $h-color-red;
+  $_type: circle;
+  @include action-button($width: $_width, $height: $_height, $background: $_background, $type: $_type);
+  @include centering();
 }
 
 // グリッド部分
 @supports (display: grid) {
   // タイトル
   .header {
-    @include page-header($startRow: 1, $rowCount: 2, $startCol: 1, $colCount: $panel-col-count, $bgImgPath: "../img/irasutoya/computer_jinkou_chinou_rad.png");
+    $_startRow: 1;
+    $_rowCount: 1;
+    $_startCol: 1;
+    $_colCount: 3;
+    @include page-header($startRow: $_startRow, $rowCount: $_rowCount, $startCol: $_startCol, $colCount: $_colCount);
   }
 
   // 起動ボタン
   .launch {
-    @include content-body($startRow: 3, $rowCount: 5, $startCol: 1, $colCount: 2, $bgColor: $h-color-yellow);
+    $_startRow: 6;
+    $_rowCount: 5;
+    $_startCol: 8;
+    $_colCount: 3;
+    @include content-body($startRow: $_startRow, $rowCount: $_rowCount, $startCol: $_startCol, $colCount: $_colCount, $bgColor: none);
     @include centering();
   }
 
   // 機能ヘッダ
-  .function-header {
-    @include content-header($startRow: 3, $rowCount: 1, $startCol: 3, $colCount: 6);
+  .function {
+    $_startRow: 11;
+    $_rowCount: 1;
+    $_startCol: 8;
+    $_colCount: 3;
+    @include content-body($startRow: $_startRow, $rowCount: $_rowCount, $startCol: $_startCol, $colCount: $_colCount);
+
+    $_width: $panel-width * $_colCount;
+    $_height: $panel-height * $_rowCount;
+    $_background: $h-color-red;
+    $_type: box;
+    @include action-button($width: $_width, $height: $_height, $background: $_background, $type: $_type);
   }
 
-  // 生活
-  .life {
-    @include content-body($startRow: 4, $rowCount: 4, $startCol: 3, $colCount: 3, $bgImgPath: "../img/irasutoya/ai_study_kikaigakusyu_rad.png", $bgSize: contain);
-    @include fukuromoji(gold, chocolate);
-    // きたないflex
-    display: flex;
-    background-position: left;
-
-    &:hover {
-      transform-origin: left;
-      grid-column: 3 / span 6;
-      margin: 0;
-      z-index: 2;
-    }
-
-    &:hover .life-explain {
-      visibility: visible;
-    }
-  }
-
-  .life-explain {
-    width: 300px;
-    font-size: $default-font-size;
-    margin: 0 0 0 auto;
-    text-align: right;
-    visibility: hidden;
-  }
-
-  // 技術
-  .tech {
-    @include content-body($startRow: 4, $rowCount: 4, $startCol: 6, $colCount: 3, $bgImgPath: "../img/irasutoya/ai_shigoto_rad.png", $bgSize: contain);
-    @include fukuromoji(lightskyblue, mediumblue);
-    text-align: right;
-    font-size: $font-size-large;
-    flex-basis: content;
-    background-position: right;
-
-    &:hover {
-      transform-origin: right;
-      grid-column: 3 / span 6;
-      margin: 0;
-      z-index: 2;
-    }
-    &:hover .tech-explain {
-      visibility: visible;
-    }
-  }
-
-  .tech-explain {
-    font-size: $default-font-size;
-    margin: 0;
-    text-align: left;
-    visibility: hidden;
-  }
-
-  // あまり
-  .amari {
-    @include content-body($startRow: 3, $rowCount: 5, $startCol: 9, $colCount: 2, $bgColor: $h-color-blue);
-  }
-
-  // 注意事項ヘッダ
-  .caution-header {
-    @include content-header($startRow: 8, $rowCount: 1, $startCol: 1, $colCount: 6);
-  }
-
-  // 注意事項
-  .caution {
-    @include content-body($startRow: 9, $rowCount: 7, $startCol: 1, $colCount: 6);
-  }
-
-  // お知らせヘッダ
-  .notice-header {
-    @include content-header($startRow: 8, $rowCount: 1, $startCol: 7, $colCount: 4);
+  // メッセージ
+  .messages {
+    $_startRow: 12;
+    $_rowCount: 4;
+    $_startCol: 1;
+    $_colCount: 5;
+    @include content-body($startRow: $_startRow, $rowCount: $_rowCount, $startCol: $_startCol, $colCount: $_colCount);
   }
 
   // お知らせ
   .notice {
-    @include content-body($startRow: 9, $rowCount: 4, $startCol: 7, $colCount: 4);
+    $_startRow: 10;
+    $_rowCount: 2;
+    $_startCol: 1;
+    $_colCount: 2;
+    @include content-body($startRow: $_startRow, $rowCount: $_rowCount, $startCol: $_startCol, $colCount: $_colCount);
+
+    $_width: $panel-width * $_colCount;
+    $_height: $panel-height * $_rowCount;
+    $_background: $h-color-red;
+    $_type: box;
+    @include action-button($width: $_width, $height: $_height, $background: $_background, $type: $_type);
   }
 
-  // お問合せヘッダ（変な物理名）
-  .footer-header {
-    @include content-header($startRow: 13, $rowCount: 1, $startCol: 7, $colCount: 4);
+  // 注意事項
+  .caution {
+    $_startRow: 10;
+    $_rowCount: 2;
+    $_startCol: 3;
+    $_colCount: 2;
+    @include content-body($startRow: $_startRow, $rowCount: $_rowCount, $startCol: $_startCol, $colCount: $_colCount);
+
+    $_width: $panel-width * $_colCount;
+    $_height: $panel-height * $_rowCount;
+    $_background: $h-color-red;
+    $_type: box;
+    @include action-button($width: $_width, $height: $_height, $background: $_background, $type: $_type);
   }
+
   // お問合せアイコン
   .footer-icon {
-    @include content-body($startRow: 14, $rowCount: 2, $startCol: 7, $colCount: 1);
+    $_startRow: 14;
+    $_rowCount: 2;
+    $_startCol: 7;
+    $_colCount: 1;
+    @include content-body($startRow: $_startRow, $rowCount: $_rowCount, $startCol: $_startCol, $colCount: $_colCount);
     @include centering();
   }
+
   // お問合せ
   .footer {
-    @include content-body($startRow: 14, $rowCount: 2, $startCol: 8, $colCount: 3);
+    $_startRow: 14;
+    $_rowCount: 2;
+    $_startCol: 8;
+    $_colCount: 3;
+    @include content-body($startRow: $_startRow, $rowCount: $_rowCount, $startCol: $_startCol, $colCount: $_colCount);
   }
 }
 ////////// 本体
 
 ////////// omake
-// ふきだし
-.balloon3 {
-  position: relative;
-  display: inline-block;
-  margin: 1.5em 0;
-  padding: 0 5px;
-  width: 180px;
-  height: 45px;
-  line-height: 45px;
-  text-align: center;
-  color: #fff;
-  font-size: $font-size-box-header;
-  font-weight: bold;
-  background: $balloon-color;
-  border-radius: 50%;
-  box-sizing: border-box;
+// ぶるぶる
+@keyframes hurueru {
+  0% {
+    transform: translate(0px, 0px) rotateZ(0deg);
+  }
+  25% {
+    transform: translate($yure, $yure) rotateZ(1deg);
+  }
+  50% {
+    transform: translate(0px, $yure) rotateZ(0deg);
+  }
+  75% {
+    transform: translate($yure, 0px) rotateZ(-1deg);
+  }
+  100% {
+    transform: translate(0px, 0px) rotateZ(0deg);
+  }
 }
 
-.balloon3:before {
-  content: "";
-  position: absolute;
-  bottom: -25px;
-  left: 50%;
-  margin-left: -15px;
-  border: 15px solid transparent;
-  border-top: 15px solid $balloon-color;
-  z-index: 0;
-}
 ////////// omake
