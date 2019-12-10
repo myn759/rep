@@ -23,7 +23,7 @@ $row-gap-size: 5px;
 $pad: 10px;
 $button-border: 2px;
 // アニメ
-$yure: 2px;
+$yure: 15px;
 ////////// 変数
 
 ////////// mixIn
@@ -68,26 +68,33 @@ $yure: 2px;
 }
 
 // ボタン基底
-@mixin action-button($width: 100px, $height: 100px, $background: white, $bprder: black, $type: none) {
+@mixin action-button($width: 100px, $height: 100px, $background: white, $type: none) {
   @include centering();
   font-size: $font-size-mid;
   color: white;
   background: $background;
-  width: $width - $pad * 2 - $button-border * 4;
-  height: $height - $pad * 2 - $button-border * 4;
+  width: $width - $pad * 2 ;
+  height: $height - $pad * 2 ;
   overflow: hidden;
-  border: 2px black dotted;
-  box-shadow: 0 0 0 $button-border $background, 0 1px 3px $button-border rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 $button-border $background, 0 1px 3px $button-border rgba(0, 0, 0, 0.7);
+  background-image: linear-gradient(transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 50%, rgba(0, 0, 0, 0.6) 100%);
+  box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.4) inset, 0 2px 2px 0 rgba(255, 255, 255, 0.5) inset, 0 -2px 2px 0 rgba(0, 0, 0, 0.1) inset;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+
+  // 形
   @if $type == "circle" {
     border-radius: 50%;
   }
+
   & img {
-    height: 64px;
+    height: 128px;
   }
   &:hover {
-    filter: brightness(125%);
+    filter: brightness(150%);
   }
   &:hover img {
+    z-index: -1;
+    height: 200px;
     animation: hurueru 0.1s infinite;
   }
 }
@@ -99,7 +106,7 @@ body {
   font-size: $default-font-size;
   font-family: "メイリオ";
   overflow-wrap: break-word;
-  background-image: url("../img/irasutoya/mono.png");
+  background-image: url("../image/irasutoya/mono.png");
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -114,11 +121,10 @@ svg {
 ul {
   margin: 0;
   padding-inline-start: 20px;
-  list-style-image: url("../img/irasutoya/computer_jinkou_chinou_li.png");
+  list-style-image: url("../image/irasutoya/computer_jinkou_chinou_li.png");
 }
 
 a {
-  color: white;
   text-decoration: none;
 }
 
@@ -149,21 +155,26 @@ a {
   $_type: circle;
   @include action-button($width: $_width, $height: $_height, $background: $_background, $type: $_type);
   @include centering();
+  position: relative;
+}
+
+.button-text {
+  position: absolute;
 }
 
 // グリッド部分
 @supports (display: grid) {
   // タイトル
-  .header {
+  #header {
     $_startRow: 1;
     $_rowCount: 1;
     $_startCol: 1;
-    $_colCount: 3;
+    $_colCount: 5;
     @include page-header($startRow: $_startRow, $rowCount: $_rowCount, $startCol: $_startCol, $colCount: $_colCount);
   }
 
   // 起動ボタン
-  .launch {
+  #launch {
     $_startRow: 6;
     $_rowCount: 5;
     $_startCol: 8;
@@ -172,8 +183,8 @@ a {
     @include centering();
   }
 
-  // 機能ヘッダ
-  .function {
+  // はじめに
+  #readme {
     $_startRow: 11;
     $_rowCount: 1;
     $_startCol: 8;
@@ -188,7 +199,7 @@ a {
   }
 
   // メッセージ
-  .messages {
+  #messages {
     $_startRow: 12;
     $_rowCount: 4;
     $_startCol: 1;
@@ -197,7 +208,7 @@ a {
   }
 
   // お知らせ
-  .notice {
+  #notice {
     $_startRow: 10;
     $_rowCount: 2;
     $_startCol: 1;
@@ -212,7 +223,7 @@ a {
   }
 
   // 注意事項
-  .caution {
+  #caution {
     $_startRow: 10;
     $_rowCount: 2;
     $_startCol: 3;
@@ -227,7 +238,7 @@ a {
   }
 
   // お問合せアイコン
-  .footer-icon {
+  #footer-icon {
     $_startRow: 14;
     $_rowCount: 2;
     $_startCol: 7;
@@ -237,7 +248,7 @@ a {
   }
 
   // お問合せ
-  .footer {
+  #footer {
     $_startRow: 14;
     $_rowCount: 2;
     $_startCol: 8;

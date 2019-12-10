@@ -9,49 +9,50 @@
     <!-- <link rel="stylesheet" href="node_modules\animate.css\animate.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.6.2/animate.min.css"
         integrity="undefined" crossorigin="anonymous" />
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="static/css/top.css">
+    <script type="text/javascript" src="static/js/top.js"></script>
     <title>ai</title>
 </head>
 
 <body>
     <div class="wrapper">
-        <header class="header">
-            header
+        <header id="header">
+            アプリ名
         </header>
 
-        <div class="launch">
-            <a href="javascript:alert('おしたよ');">
+        <div id="launch">
+            <div onclick="launch();">
                 <!-- <img src="./img/dog_min.png" alt="いぬ" class="launch_icon animated shake infinite delay-3s" /> -->
                 <div class="launch_icon">
-                    いますぐ<br>利用<br>スタート<br>
-                    <img src="./img/dog_min.png" alt="いぬ" />
+                    <span class="button-text">いますぐ<br>利用<br>スタート</span>
+                    <img src="static/image/dog_min.png" alt="いぬ" />
                 </div>
 
-            </a>
+            </div>
         </div>
 
-        <div class="messages">
+        <div id="messages">
             ここに注意事項とか書く。
         </div>
 
-        <div class="function">
+        <div id="readme" onclick="changeReadme();">
             はじめての方はこちら
         </div>
 
-        <div class="notice">
+        <div id="notice" onclick="changeNotice();">
             <i class="material-icons">rss_feed</i>おしらせ
         </div>
 
-        <div class="caution">
+        <div id="caution" onclick="changeCaution();">
             <i class="material-icons">warning</i>注意事項
         </div>
 
-        <footer class="footer-icon">
-            <img src="./img/dogicon.png" alt="いぬぬ" />
+        <footer id="footer-icon">
+            <img src="static/image/dogicon.png" alt="いぬぬ" />
         </footer>
-        <footer class="footer">
+        <footer id="footer">
             xxx xxx<br>
-            xxxxxx.xxxxxx.xx@xxx-xxx.xx.xx<br>
+            <a href="mailto:xxxxxx.xxxxxx.xx@xxx-xxx.xx.xx">xxxxxx.xxxxxx.xx@xxx-xxx.xx.xx</a>
         </footer>
     </div>
 </body>

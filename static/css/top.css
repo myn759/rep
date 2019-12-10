@@ -3,7 +3,7 @@ body {
   font-size: 12px;
   font-family: "メイリオ";
   overflow-wrap: break-word;
-  background-image: url("../img/irasutoya/mono.png");
+  background-image: url("../image/irasutoya/mono.png");
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -19,11 +19,10 @@ ul {
   margin: 0;
   -webkit-padding-start: 20px;
           padding-inline-start: 20px;
-  list-style-image: url("../img/irasutoya/computer_jinkou_chinou_li.png");
+  list-style-image: url("../image/irasutoya/computer_jinkou_chinou_li.png");
 }
 
 a {
-  color: white;
   text-decoration: none;
 }
 
@@ -61,41 +60,52 @@ a {
   font-size: 16pt;
   color: white;
   background: #e60027;
-  width: 172px;
-  height: 172px;
+  width: 180px;
+  height: 180px;
   overflow: hidden;
-  border: 2px black dotted;
-  -webkit-box-shadow: 0 0 0 2px #e60027, 0 1px 3px 2px rgba(0, 0, 0, 0.5);
-          box-shadow: 0 0 0 2px #e60027, 0 1px 3px 2px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 0 2px #e60027, 0 1px 3px 2px rgba(0, 0, 0, 0.7);
+          box-shadow: 0 0 0 2px #e60027, 0 1px 3px 2px rgba(0, 0, 0, 0.7);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, rgba(255, 255, 255, 0.3)), color-stop(50%, transparent), to(rgba(0, 0, 0, 0.6)));
+  background-image: linear-gradient(transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 50%, rgba(0, 0, 0, 0.6) 100%);
+  -webkit-box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.4) inset, 0 2px 2px 0 rgba(255, 255, 255, 0.5) inset, 0 -2px 2px 0 rgba(0, 0, 0, 0.1) inset;
+          box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.4) inset, 0 2px 2px 0 rgba(255, 255, 255, 0.5) inset, 0 -2px 2px 0 rgba(0, 0, 0, 0.1) inset;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 50%;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .launch_icon img {
-  height: 64px;
+  height: 128px;
 }
 
 .launch_icon:hover {
-  -webkit-filter: brightness(125%);
-          filter: brightness(125%);
+  -webkit-filter: brightness(150%);
+          filter: brightness(150%);
 }
 
 .launch_icon:hover img {
+  z-index: -1;
+  height: 200px;
   -webkit-animation: hurueru 0.1s infinite;
           animation: hurueru 0.1s infinite;
 }
 
+.button-text {
+  position: absolute;
+}
+
 @supports (display: grid) {
-  .header {
+  #header {
     -ms-grid-row: 1;
     -ms-grid-row-span: 1;
     grid-row: 1/span 1;
     -ms-grid-column: 1;
-    -ms-grid-column-span: 3;
-    grid-column: 1/span 3;
+    -ms-grid-column-span: 5;
+    grid-column: 1/span 5;
     background-color: "";
     border-radius: 10px 10px 10px 10px;
     padding: 10px;
@@ -111,7 +121,7 @@ a {
             justify-content: center;
     font-size: 32pt;
   }
-  .launch {
+  #launch {
     -ms-grid-row: 6;
     -ms-grid-row-span: 5;
     grid-row: 6/span 5;
@@ -132,7 +142,7 @@ a {
         -ms-flex-pack: center;
             justify-content: center;
   }
-  .function {
+  #readme {
     -ms-grid-row: 11;
     -ms-grid-row-span: 1;
     grid-row: 11/span 1;
@@ -155,25 +165,31 @@ a {
     font-size: 16pt;
     color: white;
     background: #e60027;
-    width: 272px;
-    height: 7px;
+    width: 280px;
+    height: 15px;
     overflow: hidden;
-    border: 2px black dotted;
-    -webkit-box-shadow: 0 0 0 2px #e60027, 0 1px 3px 2px rgba(0, 0, 0, 0.5);
-            box-shadow: 0 0 0 2px #e60027, 0 1px 3px 2px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 0 0 2px #e60027, 0 1px 3px 2px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 0 2px #e60027, 0 1px 3px 2px rgba(0, 0, 0, 0.7);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, rgba(255, 255, 255, 0.3)), color-stop(50%, transparent), to(rgba(0, 0, 0, 0.6)));
+    background-image: linear-gradient(transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 50%, rgba(0, 0, 0, 0.6) 100%);
+    -webkit-box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.4) inset, 0 2px 2px 0 rgba(255, 255, 255, 0.5) inset, 0 -2px 2px 0 rgba(0, 0, 0, 0.1) inset;
+            box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.4) inset, 0 2px 2px 0 rgba(255, 255, 255, 0.5) inset, 0 -2px 2px 0 rgba(0, 0, 0, 0.1) inset;
+    border: 1px solid rgba(0, 0, 0, 0.2);
   }
-  .function img {
-    height: 64px;
+  #readme img {
+    height: 128px;
   }
-  .function:hover {
-    -webkit-filter: brightness(125%);
-            filter: brightness(125%);
+  #readme:hover {
+    -webkit-filter: brightness(150%);
+            filter: brightness(150%);
   }
-  .function:hover img {
+  #readme:hover img {
+    z-index: -1;
+    height: 200px;
     -webkit-animation: hurueru 0.1s infinite;
             animation: hurueru 0.1s infinite;
   }
-  .messages {
+  #messages {
     -ms-grid-row: 12;
     -ms-grid-row-span: 4;
     grid-row: 12/span 4;
@@ -184,7 +200,7 @@ a {
     border-radius: 10px 10px 10px 10px;
     padding: 10px;
   }
-  .notice {
+  #notice {
     -ms-grid-row: 10;
     -ms-grid-row-span: 2;
     grid-row: 10/span 2;
@@ -207,25 +223,31 @@ a {
     font-size: 16pt;
     color: white;
     background: #e60027;
-    width: 172px;
-    height: 42px;
+    width: 180px;
+    height: 50px;
     overflow: hidden;
-    border: 2px black dotted;
-    -webkit-box-shadow: 0 0 0 2px #e60027, 0 1px 3px 2px rgba(0, 0, 0, 0.5);
-            box-shadow: 0 0 0 2px #e60027, 0 1px 3px 2px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 0 0 2px #e60027, 0 1px 3px 2px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 0 2px #e60027, 0 1px 3px 2px rgba(0, 0, 0, 0.7);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, rgba(255, 255, 255, 0.3)), color-stop(50%, transparent), to(rgba(0, 0, 0, 0.6)));
+    background-image: linear-gradient(transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 50%, rgba(0, 0, 0, 0.6) 100%);
+    -webkit-box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.4) inset, 0 2px 2px 0 rgba(255, 255, 255, 0.5) inset, 0 -2px 2px 0 rgba(0, 0, 0, 0.1) inset;
+            box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.4) inset, 0 2px 2px 0 rgba(255, 255, 255, 0.5) inset, 0 -2px 2px 0 rgba(0, 0, 0, 0.1) inset;
+    border: 1px solid rgba(0, 0, 0, 0.2);
   }
-  .notice img {
-    height: 64px;
+  #notice img {
+    height: 128px;
   }
-  .notice:hover {
-    -webkit-filter: brightness(125%);
-            filter: brightness(125%);
+  #notice:hover {
+    -webkit-filter: brightness(150%);
+            filter: brightness(150%);
   }
-  .notice:hover img {
+  #notice:hover img {
+    z-index: -1;
+    height: 200px;
     -webkit-animation: hurueru 0.1s infinite;
             animation: hurueru 0.1s infinite;
   }
-  .caution {
+  #caution {
     -ms-grid-row: 10;
     -ms-grid-row-span: 2;
     grid-row: 10/span 2;
@@ -248,25 +270,31 @@ a {
     font-size: 16pt;
     color: white;
     background: #e60027;
-    width: 172px;
-    height: 42px;
+    width: 180px;
+    height: 50px;
     overflow: hidden;
-    border: 2px black dotted;
-    -webkit-box-shadow: 0 0 0 2px #e60027, 0 1px 3px 2px rgba(0, 0, 0, 0.5);
-            box-shadow: 0 0 0 2px #e60027, 0 1px 3px 2px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 0 0 2px #e60027, 0 1px 3px 2px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 0 2px #e60027, 0 1px 3px 2px rgba(0, 0, 0, 0.7);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, rgba(255, 255, 255, 0.3)), color-stop(50%, transparent), to(rgba(0, 0, 0, 0.6)));
+    background-image: linear-gradient(transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 50%, rgba(0, 0, 0, 0.6) 100%);
+    -webkit-box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.4) inset, 0 2px 2px 0 rgba(255, 255, 255, 0.5) inset, 0 -2px 2px 0 rgba(0, 0, 0, 0.1) inset;
+            box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.4) inset, 0 2px 2px 0 rgba(255, 255, 255, 0.5) inset, 0 -2px 2px 0 rgba(0, 0, 0, 0.1) inset;
+    border: 1px solid rgba(0, 0, 0, 0.2);
   }
-  .caution img {
-    height: 64px;
+  #caution img {
+    height: 128px;
   }
-  .caution:hover {
-    -webkit-filter: brightness(125%);
-            filter: brightness(125%);
+  #caution:hover {
+    -webkit-filter: brightness(150%);
+            filter: brightness(150%);
   }
-  .caution:hover img {
+  #caution:hover img {
+    z-index: -1;
+    height: 200px;
     -webkit-animation: hurueru 0.1s infinite;
             animation: hurueru 0.1s infinite;
   }
-  .footer-icon {
+  #footer-icon {
     -ms-grid-row: 14;
     -ms-grid-row-span: 2;
     grid-row: 14/span 2;
@@ -287,7 +315,7 @@ a {
         -ms-flex-pack: center;
             justify-content: center;
   }
-  .footer {
+  #footer {
     -ms-grid-row: 14;
     -ms-grid-row-span: 2;
     grid-row: 14/span 2;
@@ -306,16 +334,16 @@ a {
             transform: translate(0px, 0px) rotateZ(0deg);
   }
   25% {
-    -webkit-transform: translate(2px, 2px) rotateZ(1deg);
-            transform: translate(2px, 2px) rotateZ(1deg);
+    -webkit-transform: translate(15px, 15px) rotateZ(1deg);
+            transform: translate(15px, 15px) rotateZ(1deg);
   }
   50% {
-    -webkit-transform: translate(0px, 2px) rotateZ(0deg);
-            transform: translate(0px, 2px) rotateZ(0deg);
+    -webkit-transform: translate(0px, 15px) rotateZ(0deg);
+            transform: translate(0px, 15px) rotateZ(0deg);
   }
   75% {
-    -webkit-transform: translate(2px, 0px) rotateZ(-1deg);
-            transform: translate(2px, 0px) rotateZ(-1deg);
+    -webkit-transform: translate(15px, 0px) rotateZ(-1deg);
+            transform: translate(15px, 0px) rotateZ(-1deg);
   }
   100% {
     -webkit-transform: translate(0px, 0px) rotateZ(0deg);
@@ -329,16 +357,16 @@ a {
             transform: translate(0px, 0px) rotateZ(0deg);
   }
   25% {
-    -webkit-transform: translate(2px, 2px) rotateZ(1deg);
-            transform: translate(2px, 2px) rotateZ(1deg);
+    -webkit-transform: translate(15px, 15px) rotateZ(1deg);
+            transform: translate(15px, 15px) rotateZ(1deg);
   }
   50% {
-    -webkit-transform: translate(0px, 2px) rotateZ(0deg);
-            transform: translate(0px, 2px) rotateZ(0deg);
+    -webkit-transform: translate(0px, 15px) rotateZ(0deg);
+            transform: translate(0px, 15px) rotateZ(0deg);
   }
   75% {
-    -webkit-transform: translate(2px, 0px) rotateZ(-1deg);
-            transform: translate(2px, 0px) rotateZ(-1deg);
+    -webkit-transform: translate(15px, 0px) rotateZ(-1deg);
+            transform: translate(15px, 0px) rotateZ(-1deg);
   }
   100% {
     -webkit-transform: translate(0px, 0px) rotateZ(0deg);
